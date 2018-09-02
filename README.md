@@ -7,18 +7,14 @@ First, download a CSV summary class record from Hokie Spa. Then run the script w
 
 $ ./random-groups.sh location/of/file.csv num_groups
 
-Default output goes to stdout. Output is a tab-seperated numbered list of students with line breaks and headings for each group. This script uses awk and tr to process the CSV file and gshuf for randomness. You can install gshuf using Homebrew. It does not come with Mac OSX.
+Default output goes to stdout. Output is a list of students with line breaks and headings for each group. This script uses awk and tr to process the CSV file and gshuf for randomness. You can install gshuf using Homebrew. It does not come with Mac OSX but is required to randomize the list.
 
 This is a basic script. There is very limited input validation.
 
 ## Logic
 
-Simply using a modulo to iterate over a student list can result in a group with one student or a group that is much smaller than other groups. Logic is incorporated into the script to make groups that are of comprable sizes regardless of the situation.
+The script uses an array with an element for each group, delimiting student names in the group using commas. It adds students to groups one at a time until it runs out of names, resulting in an even distribution given the number of students and groups. The current version uses a much more streamlined algorithm and incorporates some additional checks on input than the initial commit.
 
-The script will create groups of the same size if the number of students and number of groups permit. If there is a remainder, the script will attempt to create two smaller groups with one fewer student than in the larger groups. If this is not possible, it will create two smaller groups: one with one fewer student than in the larger groups and one with two fewer students.
+## Applications
 
-## Future
-
-The logic right now is rudamentary in that the script will always try to make as many large groups as possible before creating the final groups in cases where the groups do not divide evenly. I'd like to add some additional logic to the script to support different group configurations. For instance, it may be preferable when splitting a class of 22 into five groups to have two groups of five and three groups of four as opposed to three groups of five and then a group of four and three.
-
-There are also some unique cases I'd like to address. One would be creating groups of two and three students, where it is still possible to end with a group of one. I'm still debugging some of these situations, so bear with me.
+For smaller discussion classes and seminars, you can effectively display the groups in your terminal and project them. For larger classes, you may want to pipe output to a text file and edit as needed for handouts, online sharing, etc.
