@@ -16,3 +16,9 @@ This is a basic script. There is very limited input validation.
 Simply using a modulo to iterate over a student list can result in a group with one student or a group that is much smaller than other groups. Logic is incorporated into the script to make groups that are of comprable sizes regardless of the situation.
 
 The script will create groups of the same size if the number of students and number of groups permit. If there is a remainder, the script will attempt to create two smaller groups with one fewer student than in the larger groups. If this is not possible, it will create two smaller groups: one with one fewer student than in the larger groups and one with two fewer students.
+
+## Future
+
+The logic right now is rudamentary in that the script will always try to make as many large groups as possible before creating the final groups in cases where the groups do not divide evenly. I'd like to add some additional logic to the script to support different group configurations. For instance, it may be preferable when splitting a class of 22 into five groups to have two groups of five and three groups of four as opposed to three groups of five and then a group of four and three.
+
+There are also some unique cases I'd like to address. One would be creating groups of two and three students, where it is still possible to end with a group of one. I'm still debugging some of these situations, so bear with me.
