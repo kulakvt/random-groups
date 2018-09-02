@@ -91,5 +91,5 @@ if [ "$2" != "" ] ; then
 # Handles situation where proper arguments are not provided
 else
 	echo Arguments missing
-	echo $0 path/to/file.csv num_groups
+	echo $0 location/of/file.csv num_groups
 fi
