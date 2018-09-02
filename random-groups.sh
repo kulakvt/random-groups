@@ -38,7 +38,7 @@ if [ "$2" != "" ] ; then
 
 	# Output for user if too many groups are entered
 	else
-		echo Not enough students for $2 groups
+		echo Not enough students to divide into $2 groups
 	fi
 
 # Handles situation where proper arguments are not provided
