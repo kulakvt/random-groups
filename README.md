@@ -1,7 +1,7 @@
 # random-groups
 A bash script for creating random groups of Virginia Tech students for class activities
 
-# Usage
+## Usage
 
 First, download a CSV summary class record from Hokie Spa. Then run the script with the location of that CSV file as the first argument and the number of random groups as the second:
 
@@ -11,7 +11,7 @@ Default output goes to stdout. Output is a tab-seperated numbered list of studen
 
 This is a basic script. There is very limited input validation.
 
-# Logic
+## Logic
 
 Simply using a modulo to iterate over a student list can result in a group with one student or a group that is much smaller than other groups. Logic is incorporated into the script to make groups that are of comprable sizes regardless of the situation.
 
