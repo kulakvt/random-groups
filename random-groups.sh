@@ -61,10 +61,8 @@ if [ "$2" != "" ] ; then
 		done
 
 		# Prints out the groups to stdout
-		current_student=0
-		for k in "${indiv_students[@]}" ; do
-			echo -e $k
-			current_student=$(($current_student + 1))
+		for l in "${indiv_students[@]}" ; do
+			echo -e $l
 		done
 
 	# Output for user if too many groups are entered
