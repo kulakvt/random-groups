@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # random-groups.sh by Andrew Kulak
-# v1.1 Sun Sep  2 18:35:02 EDT 2018
+# v1.2 Mon Sep  3 14:46:10 EDT 2018
 # This script generates random groups of students for activities
 # Argument 1: path to a Virginia Tech Hokie Spa student list CSV
 # Argument 2: Number of groups
@@ -26,13 +26,45 @@ if [ "$2" != "" ] ; then
 	# Checks to make sure input will work
 	if [ $(($num_students / $2)) -gt "1" ] ; then
 		grouped_students=()
-		for i in `seq 0 $(($num_students - 1))` ; do
-			current_group=$(($i % $2))
-			grouped_students[current_group]="${grouped_students[current_group]}${class_arr[$i]},"
+		current_student=0
+		for i in "${class_arr[@]}" ; do
+			current_group=$(($current_student % $2))
+			grouped_students[current_group]="${grouped_students[current_group]}$i\n"
+			current_student=$(($current_student + 1))
 		done
-		for j in `seq 0 $(($2 - 1))` ; do
-			echo Group $((j + 1))
-			echo ${grouped_students[$j]} | tr , '\n'
+		for j in `seq 1 $2` ; do
+			grouped_students[$(($j - 1))]="Group $j\n${grouped_students[$(($j - 1))]}"
+		done
+
+		# Builds array of individual students ordered into their groups with group headers
+		# Use newline characters as field seperator for array
+		IFS=$'\n'
+		
+		# The awk command trims extra whitespace which is important for correct formatting later
+		indiv_students=($(echo -e ${grouped_students[@]} | awk '$1=$1'))
+		
+		# Reset IFS
+		IFS=$SAVEIFS
+
+		# Adds individual student numbers for each student
+		current_student=0
+		current_line=0
+		for k in "${indiv_students[@]}" ; do
+			if [[ $k != Group*  ]] ; then
+				indiv_students[$current_line]="$(($current_student + 1))\t$k"
+				current_student=$(($current_student + 1))
+				current_line=$(($current_line + 1))
+			else
+				indiv_students[$current_line]="\t$k"	
+				current_line=$(($current_line + 1))
+			fi
+		done
+
+		# Prints out the groups to stdout
+		current_student=0
+		for k in "${indiv_students[@]}" ; do
+			echo -e $k
+			current_student=$(($current_student + 1))
 		done
 
 	# Output for user if too many groups are entered
