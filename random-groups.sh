@@ -6,7 +6,7 @@
 # Argument 1: path to a Virginia Tech Hokie Spa student list CSV
 # Argument 2: Number of groups
 # Tested on Mac OS X, 10.11.6, 15G1421 GNU bash, version 3.2.57(1)
-# Requires: gshuf, awk
+# Uses: gshuf, awk, cat, tr, seq
 
 if [ "$2" != "" ] ; then
 	
@@ -22,7 +22,6 @@ if [ "$2" != "" ] ; then
 
 	# Begin main script
 	num_students=${#class_arr[@]}
-	students_per_group=$(($num_students/$2))
 
 	# Checks to make sure input will work
 	if [ $(($num_students / $2)) -gt "1" ] ; then
